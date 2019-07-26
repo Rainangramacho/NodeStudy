@@ -2,10 +2,10 @@
 
 console.log('Teste');
 //importando os protocolos abaixo e guardando nas contantes que estão antes da igualdade
+
 const http = require('http');
 const app = require ('../src/app'); // importando arquivo app
 const debug = require('debug')('nodestr:server');
-const express = require('express');
 
 //se não vier porta setada ele seta a 3000
 const port = normalizePort(process.env.PORT || '3000');
@@ -40,6 +40,7 @@ function onListening(){
     : 'port' + addr.port;
     debug('Listening on ' + bind);
 }
+
 
 
 
