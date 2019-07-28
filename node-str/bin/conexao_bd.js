@@ -51,7 +51,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'node_bd'
+    database: 'surf_desafio'
 });
 
 connection.connect(function(err){
