@@ -16,6 +16,7 @@ exports.obter_bateria = (req, res, next) =>{
 exports.criar_bateria = (req, res, next) =>{
     
     const bateria = { 
+        id: req.body.id,
         surfista_numero: req.body.surfista_numero
       }
       //vendo se na tabela de surfistas existe um surfista com o numero informado
@@ -49,9 +50,9 @@ exports.criar_bateria = (req, res, next) =>{
         
     });//se tiver mais que dois sufistas na bateria, nao poderá cadastrar o terceiro
   */
-    if(teste == 0){
+    
         
-    var sql = 'INSERT INTO bateria (Surfista_numero) VALUES (" ' + bateria.surfista_numero +' ");';
+    var sql = 'INSERT INTO bateria (id,Surfista_numero) VALUES (" ' + bateria.id +' "," ' + bateria.surfista_numero +' ");';
         conexao.query(sql, function(err, rows, fields){
             if (err){
                 res.status(500).send({error: ' Algo falhou '})
@@ -59,7 +60,7 @@ exports.criar_bateria = (req, res, next) =>{
             res.json(rows);
            
         }) 
-    }
+    
    
 };
 

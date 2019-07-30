@@ -60,3 +60,5 @@ connection.connect(function(err){
 });
 
 module.exports = connection;
+
+//solução caso o client mysql dê problema ---> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'

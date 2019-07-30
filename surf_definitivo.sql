@@ -32,8 +32,8 @@ ENGINE = InnoDB;
 -- Table `Surf_desafio`.`Bateria`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Surf_desafio`.`Bateria` (
-  `id` INT(15) NOT NULL AUTO_INCREMENT,
-  `Surfista_numero` INT(15) NOT NULL,
+  `id` INT(15) NOT NULL  ,
+  `Surfista_numero` INT(15) NOT NULL ,
   PRIMARY KEY (`id`),
   INDEX `fk_Bateria_Surfista_idx` (`Surfista_numero` ASC) VISIBLE,
   CONSTRAINT `fk_Bateria_Surfista`
@@ -48,14 +48,14 @@ ENGINE = InnoDB;
 -- Table `Surf_desafio`.`Onda`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Surf_desafio`.`Onda` (
-  `id` INT(15) NOT NULL AUTO_INCREMENT,
-  `Sufista_numero` INT(15) NOT NULL,
+  `id` INT(15) NOT NULL ,
+  `Surfista_numero` INT(15) NOT NULL,
   `Bateria_id` INT(15) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Surfista_Bateria_Onda_idx` (`Sufista_numero` ASC) VISIBLE,
+  INDEX `fk_Surfista_Bateria_Onda_idx` (`Surfista_numero` ASC) VISIBLE,
   INDEX `fk_Onda_Bateria1_idx` (`Bateria_id` ASC) VISIBLE,
   CONSTRAINT `fk_Surfista_Bateria_Onda`
-    FOREIGN KEY (`Sufista_numero`)
+    FOREIGN KEY (`Surfista_numero`)
     REFERENCES `Surf_desafio`.`Bateria` (`Surfista_numero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
