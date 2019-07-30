@@ -1,5 +1,6 @@
 'use strict'
 const conexao = require ('../../bin/conexao_bd');
+var teste =0;
 
 
 exports.obter_bateria = (req, res, next) =>{
@@ -13,16 +14,53 @@ exports.obter_bateria = (req, res, next) =>{
 };
 
 exports.criar_bateria = (req, res, next) =>{
+    
     const bateria = { 
         surfista_numero: req.body.surfista_numero
       }
-    var sql = 'INSERT INTO bateria (Surfista_numero) VALUES (" ' + bateria.surfista_numero +' ");';
-    conexao.query(sql, function(err, rows, fields){
-        if (err){
-            res.status(500).send({error: ' Algo falhou '})
+      //vendo se na tabela de surfistas existe um surfista com o numero informado
+      conexao.query('SELECT surfista.numero FROM surfista WHERE numero = " ' + bateria.surfista_numero +' ";', (err, res) => {
+        console.log(err, res, res.length); // deve dar null, [], 0
+        if (res.length == 0){
+            console.log('O sufista informado nao esta cadastrado');
+            teste =1;
+            //se não existir surfista, nao cadastra na bateria
         }
-        res.json(rows);
-    }) 
+    });
+
+    //verificando se o surfista ja esta na bateria
+    conexao.query('SELECT bateria.Surfista_numero FROM bateria WHERE Surfista_numero = " ' + bateria.surfista_numero +' ";', (err, res) => {
+        console.log(err, res, res.length); 
+        if (res.length >= 1){ // possa ser que tenha mais de um surfista cadastrado com o mesmo numero
+            console.log('Surfista já cadastrado');
+            teste =1;
+        }
+    });//se nao tiver cadastrado, ele poderá ser cadastrado
+
+
+     //contado pra saber quantos surfistas estão cadstrados na bateria
+     /* conexao.query('SELECT count(Surfista_numero) FROM bateria;', (err, res,rows) => {
+            console.log('Pode cadastrar');
+            if (res.query == 2){
+                console.log('asdasdads');
+                teste =1;
+                
+            }
+        
+    });//se tiver mais que dois sufistas na bateria, nao poderá cadastrar o terceiro
+  */
+    if(teste == 0){
+        
+    var sql = 'INSERT INTO bateria (Surfista_numero) VALUES (" ' + bateria.surfista_numero +' ");';
+        conexao.query(sql, function(err, rows, fields){
+            if (err){
+                res.status(500).send({error: ' Algo falhou '})
+            }
+            res.json(rows);
+           
+        }) 
+    }
+   
 };
 
 exports.editar_bateria = (req, res, next) =>{
