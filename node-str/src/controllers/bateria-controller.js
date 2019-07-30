@@ -20,17 +20,17 @@ exports.criar_bateria = (req, res, next) =>{
         surfista_numero: req.body.surfista_numero
       }
       //vendo se na tabela de surfistas existe um surfista com o numero informado
-      conexao.query('SELECT surfista.numero FROM surfista WHERE numero = " ' + bateria.surfista_numero +' ";', (err, res) => {
+     conexao.query('SELECT surfista.numero FROM surfista WHERE numero = " ' + bateria.surfista_numero +' ";', (err, res) => {
         console.log(err, res, res.length); // deve dar null, [], 0
         if (res.length == 0){
-            console.log('O sufista informado nao esta cadastrado');
+            console.log('O surfista informado nao esta cadastrado');
             teste =1;
             //se não existir surfista, nao cadastra na bateria
         }
-    });
+    }); 
 
     //verificando se o surfista ja esta na bateria
-    conexao.query('SELECT bateria.Surfista_numero FROM bateria WHERE Surfista_numero = " ' + bateria.surfista_numero +' ";', (err, res) => {
+    conexao.query('SELECT bateria.Surfista_numero FROM bateria WHERE Surfista_numero = " ' + bateria.surfista_numero +' " AND id = " ' + bateria.id +' ";', (err, res) => {
         console.log(err, res, res.length); 
         if (res.length >= 1){ // possa ser que tenha mais de um surfista cadastrado com o mesmo numero
             console.log('Surfista já cadastrado');
@@ -50,18 +50,17 @@ exports.criar_bateria = (req, res, next) =>{
         
     });//se tiver mais que dois sufistas na bateria, nao poderá cadastrar o terceiro
   */
+        if(teste==0){
+            var sql = 'INSERT INTO bateria (id,Surfista_numero) VALUES (" ' + bateria.id +' "," ' + bateria.surfista_numero +' ");';
+            conexao.query(sql, function(err, rows, fields){
+                if (err){
+                    res.status(500).send({error: ' Algo falhou '})
+                }
+                res.json(rows);
+            }) 
+        }   
+       
     
-        
-    var sql = 'INSERT INTO bateria (id,Surfista_numero) VALUES (" ' + bateria.id +' "," ' + bateria.surfista_numero +' ");';
-        conexao.query(sql, function(err, rows, fields){
-            if (err){
-                res.status(500).send({error: ' Algo falhou '})
-            }
-            res.json(rows);
-           
-        }) 
-    
-   
 };
 
 exports.editar_bateria = (req, res, next) =>{
