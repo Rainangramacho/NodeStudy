@@ -6,7 +6,7 @@ const controller = require('../controllers/onda-controller');
 
 
 //configurando rotas
-//router.get ('/obter_bateria', controller.obter_bateria);
+router.get ('/visualizar_ondas', controller.visualizar_ondas);
 router.post ('/cadastrar_onda', controller.cadastrar_onda);
 //router.put ('/editar_bateria/:Surfista_numero', controller.editar_bateria);
 //router.delete ('/deletar_bateria/:id', controller.deletar_bateria); 
