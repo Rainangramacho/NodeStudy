@@ -19,3 +19,27 @@ exports.cadastrar_nota = (req, res, next) => {
     res.json(rows);
 }) 
 };
+
+exports.visualizar_notas = (req, res, next) => {
+
+    var sql = 'SELECT * FROM nota ;';
+
+   conexao.query(sql, function(err, rows, fields){
+    if (err){
+        res.status(500).send({error: ' Algo falhou '})
+    }
+    res.json(rows);
+}) 
+};
+
+exports.surfista_vencedor = (req, res, next) => {
+
+    var sql = 'SELECT * FROM nota ;';
+
+   conexao.query(sql, function(err, rows, fields){
+    if (err){
+        res.status(500).send({error: ' Algo falhou '})
+    }
+    res.json(rows);
+}) 
+};
