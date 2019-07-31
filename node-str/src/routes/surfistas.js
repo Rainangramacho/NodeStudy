@@ -7,7 +7,7 @@ const controller = require('../controllers/surfistas-controller');
 
 
 //configurando rotas
-router.get ('/obter', controller.obter_surfista);
+router.get ('/obter_surfista', controller.obter_surfista);
 router.get ('/obter_surfista_pais', controller.obter_surfista_pais);
 router.post ('/cadastrar_surfista', controller.cadastrar_surfista);
 router.put ('/editar_surfista/:numero', controller.editar_surfista);
