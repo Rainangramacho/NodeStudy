@@ -23,7 +23,7 @@ exports.criar_bateria = (req, res, next) =>{
       //vendo se na tabela de surfistas existe um surfista com o numero informado
      conexao.query('SELECT surfista.numero FROM surfista WHERE numero = " ' + bateria.surfista_numero1 +' " OR numero = " ' + bateria.surfista_numero2 +' " ;', (err, res) => {
         console.log(err, res, res.length); // deve dar null, [], 0
-        if (res.length < 2){
+        if (res.length < 2){// se ficar igual a zero é pq nao existe um ou os dois surfistas informados
             console.log('Um ou os dois surfistas informados não existe');
             teste =1;
             //se não existir surfista, nao cadastra na bateria
