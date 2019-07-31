@@ -8,15 +8,16 @@ exports.cadastrar_onda = (req, res, next) => {
         surfista_numero: req.body.surfista_numero, 
         bateria_id: req.body.bateria_id
       }
-      conexao.query('SELECT * FROM bateria WHERE Surfista_numero1 = " ' + onda.surfista_numero +' " OR  Surfista_numero2 = " ' + onda.surfista_numero +' " ;', (err, res) => {
+
+       conexao.query('SELECT * FROM bateria WHERE bateria.id = " '+ onda.bateria_id +' " AND (Surfista_numero1 =" ' + onda.surfista_numero +' " OR Surfista_numero2 = " ' + onda.surfista_numero + ' ")  ;', (err, res) => {
         console.log(err, res, res.length); // deve dar null, [], 0
         if (res.length == 0){
-            console.log('Um ou os dois surfistas informados não existe');
+            console.log('');
             helpVar =1;
+            //console.log(helpVar);
             //se não existir surfista, nao cadastra na bateria
         }
-    }); 
-   
+    });  
     if(helpVar == 0){
         var sql = 'INSERT INTO onda (id, Surfista_numero, Bateria_id)' +
         'VALUES (" '+onda.id+' ", " '+ onda.surfista_numero+' ", " ' + onda.bateria_id+' ");';
@@ -27,8 +28,8 @@ exports.cadastrar_onda = (req, res, next) => {
             }
             res.json(rows);
         }) 
-        };
     }
+};  
 
 exports.visualizar_ondas = (req, res, next) => {
     
