@@ -17,68 +17,43 @@ exports.criar_bateria = (req, res, next) =>{
     
     const bateria = { 
         id: req.body.id,
-        surfista_numero: req.body.surfista_numero
+        surfista_numero1: req.body.surfista_numero1,
+        surfista_numero2: req.body.surfista_numero2
       }
       //vendo se na tabela de surfistas existe um surfista com o numero informado
-     conexao.query('SELECT surfista.numero FROM surfista WHERE numero = " ' + bateria.surfista_numero +' ";', (err, res) => {
+     conexao.query('SELECT surfista.numero FROM surfista WHERE numero = " ' + bateria.surfista_numero1 +' " OR numero = " ' + bateria.surfista_numero2 +' " ;', (err, res) => {
         console.log(err, res, res.length); // deve dar null, [], 0
-        if (res.length == 0){
-            console.log('O surfista informado nao esta cadastrado');
+        if (res.length < 2){
+            console.log('Um ou os dois surfistas informados não existe');
             teste =1;
             //se não existir surfista, nao cadastra na bateria
         }
     }); 
-
-    //verificando se o surfista ja esta na bateria
-    conexao.query('SELECT bateria.Surfista_numero FROM bateria WHERE Surfista_numero = " ' + bateria.surfista_numero +' " AND id = " ' + bateria.id +' ";', (err, res) => {
+    
+    //verificando se um sufista existe e se ele ta cadastrado na bateria , caso ele exista mas nao esteja cadastrado na bateria, então poderá ser cadastrado
+    conexao.query('SELECT * FROM bateria WHERE EXISTS (SELECT numero FROM surfista WHERE surfista.numero = "' + bateria.surfista_numero1 + '" OR surfista.numero = "' + bateria.surfista_numero2 + '")AND bateria.id = " ' + bateria.id +' " ;', (err, res) => {
         console.log(err, res, res.length); 
         if (res.length >= 1){ // possa ser que tenha mais de um surfista cadastrado com o mesmo numero
-            console.log('Surfista já cadastrado');
+            console.log('Surfista1 já está cadastrado na bateria, cadastre outro surfista.');
             teste =1;
         }
-    });//se nao tiver cadastrado, ele poderá ser cadastrado
-
-
-     //contado pra saber quantos surfistas estão cadstrados na bateria
-     /* conexao.query('SELECT count(Surfista_numero) FROM bateria;', (err, res,rows) => {
-            console.log('Pode cadastrar');
-            if (res.query == 2){
-                console.log('asdasdads');
-                teste =1;
-                
-            }
-        
-    });//se tiver mais que dois sufistas na bateria, nao poderá cadastrar o terceiro
-  */
+    });
+    
         if(teste==0){
-            var sql = 'INSERT INTO bateria (id,Surfista_numero) VALUES (" ' + bateria.id +' "," ' + bateria.surfista_numero +' ");';
+            var sql = 'INSERT INTO bateria (id,Surfista_numero1,Surfista_numero2) VALUES (" ' + bateria.id +' "," ' + bateria.surfista_numero1 +' "," ' + bateria.surfista_numero2 +' ");';
             conexao.query(sql, function(err, rows, fields){
                 if (err){
                     res.status(500).send({error: ' Algo falhou '})
                 }
                 res.json(rows);
             }) 
-        }   
+        }    
        
     
 };
 
-exports.editar_bateria = (req, res, next) =>{
-    const bateria = { 
-        surfista_numero_params: req.params.Surfista_numero,
-        surfista_numero_body: req.body.Surfista_numero
-      }
-    var sql = 'UPDATE bateria SET Surfista_numero = " ' + bateria.surfista_numero_body +' " WHERE Surfista_numero = " ' + bateria.surfista_numero_params + ' ";';
-    conexao.query(sql, function(err, rows, fields){
-        if (err){
-            res.status(500).send({error: ' Algo falhou '})
-        }
-        res.json(rows);
-    }) 
-};
-
 exports.obter_surfistas_na_bateria = (req, res, next) =>{
-    var sql = "SELECT surfista.nome FROM bateria INNER JOIN surfista ON (bateria.Surfista_numero = surfista.numero)";
+    var sql = "SELECT bateria.id, surfista.nome, surfista.pais  FROM bateria INNER JOIN surfista ON (bateria.Surfista_numero1 = surfista.numero OR bateria.Surfista_numero2 = surfista.numero)";
     conexao.query(sql, function(err, rows, fields){
         if (err){
             res.status(500).send({error: ' Algo falhou '})
@@ -93,6 +68,20 @@ exports.deletar_bateria = (req, res, next)=>{
       }
 
    var sql6 = 'DELETE FROM bateria WHERE id = " ' + bateria.id + ' "; ';
+   conexao.query(sql6, function(err, rows, fields){
+    if (err){
+        res.status(500).send({error: ' Algo falhou '})
+    }
+    res.json(rows);
+}) 
+};
+
+exports.obter_vencedor = (req, res, next)=>{
+    const bateria = { 
+        id : req.params.id,
+      }
+
+   var sql6 = '';
    conexao.query(sql6, function(err, rows, fields){
     if (err){
         res.status(500).send({error: ' Algo falhou '})
