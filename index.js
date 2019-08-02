@@ -8,7 +8,7 @@ const app = require ('./node-str/src/app'); // importando arquivo app
 
 
 //se não vier porta setada ele seta a 3000
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 const server = http.createServer(app); // criando server
