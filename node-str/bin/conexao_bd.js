@@ -48,10 +48,10 @@ sequelize.authenticate().then(function(){
 var mysql = require ('mysql');
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'surf_desafio'
+    host: 'us-cdbr-iron-east-02.cleardb.net',
+    user: 'bb04866fd41d20',
+    password: 'ecae6d61',
+    database: 'heroku_9756cda1284588d'
 });
 
 connection.connect(function(err){
