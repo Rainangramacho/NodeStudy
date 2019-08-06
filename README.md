@@ -1,5 +1,5 @@
-# NodeStudy
- Some exercises with node.
+# Surf-horizon project
+ This is a Node.js project of the selective process of internship at Horizon.
 
 # Improve programming skills
-Learning how Node.js and Restful APIs work and how to implement them.
+Learning how Node.js and Restful APIs works and how to implement them.
