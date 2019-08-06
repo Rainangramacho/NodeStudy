@@ -1,10 +1,7 @@
 'use strict'
 
 const express = require('express');
-//criando constantes que recebem a porta e o express
-const router = express.Router() // criando variavel qu recebe rotas
-
-
+const router = express.Router() // criando variavel que recebe rotas
 //configurando rotas
 router.get ('/', (req, res, next)=>{
     res.status(200).send({
@@ -14,4 +11,4 @@ router.get ('/', (req, res, next)=>{
 });
 
 
-module.exports = router; // esse module.exports recebe a variavel que recebe o express.Router()
+module.exports = router; 

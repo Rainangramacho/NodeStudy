@@ -56,6 +56,8 @@ exports.surfista_vencedor = (req, res, next) => {
     if (err){
         res.status(500).send({error: ' Algo falhou '})
     }
+    /* const teste = rows;
+    console.log(teste); */
     res.json(rows);
 }) 
 };
