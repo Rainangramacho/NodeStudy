@@ -8,7 +8,7 @@ const router = express.Router() // criando variavel qu recebe rotas
 //configurando rotas
 router.get ('/', (req, res, next)=>{
     res.status(200).send({
-        title: "Welcome to my Node.js API RESTful",
+        title: "Bem vindo à minha API RESTful em Node.js !! ",
         
     });
 });
