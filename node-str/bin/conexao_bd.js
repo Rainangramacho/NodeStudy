@@ -48,10 +48,10 @@ sequelize.authenticate().then(function(){
 var mysql = require ('mysql');
 
 var connection = mysql.createConnection({
-    host: 'us-cdbr-iron-east-02.cleardb.net',
-    user: 'bb04866fd41d20',
-    password: 'ecae6d61',
-    database: 'heroku_9756cda1284588d'
+    host: 'z12itfj4c1vgopf8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: 'bahbj3algje18sdv',
+    password: 'uwzqr4km5z3yr7n8',
+    database: 'f6cwob7pa1y4lorv'
 });
 
 connection.connect(function(err){
@@ -59,6 +59,9 @@ connection.connect(function(err){
     console.log('connected!');
 });
 
+
 module.exports = connection;
+
+
 
 //solução caso o client mysql dê problema ---> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
