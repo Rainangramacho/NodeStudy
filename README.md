@@ -1,4 +1,4 @@
-# NodeStudy
+# Surf-horizon project
  This is a Node.js project of the selective process of internship at Horizon.
 
 # Improve programming skills
