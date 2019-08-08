@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+
 //criando constantes que recebem a porta e o express
 const app = express();
 const indexRoute = require('./routes/index-route');
@@ -14,6 +15,7 @@ const notas = require('./routes/notas');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false})); // codificar url
+
 
 app.use('/', indexRoute);
 app.use('/surfistas', surfistas);
