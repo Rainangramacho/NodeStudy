@@ -48,8 +48,7 @@ exports.criar_bateria = (req, res, next) =>{
                 res.json(rows);
             }) 
         }    
-       
-    
+
 };
 
 exports.obter_surfistas_na_bateria = (req, res, next) =>{
