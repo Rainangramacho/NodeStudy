@@ -16,7 +16,7 @@ exports.obter_surfista_pais = (req, res, next) =>{
     const surfista = { 
         pais: req.body.pais
       }
-      var sql2 = 'SELECT numero, nome FROM surfista WHERE pais = " ' + surfista.pais + ' "; ';
+      var sql2 = 'SELECT numero, nome, pais FROM surfista WHERE pais = " ' + surfista.pais + ' "; ';
         conexao.query(sql2, function(err, rows, fields){
             if (err){
                 res.status(500).send({error: ' Algo falhou '})
