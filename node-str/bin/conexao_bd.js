@@ -47,7 +47,7 @@ sequelize.authenticate().then(function(){
 
 var mysql = require ('mysql');
 
-var connection = mysql.createConnection({
+var connection = mysql.createConnection({multipleStatements: true,
     host: 'z12itfj4c1vgopf8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     user: 'bahbj3algje18sdv',
     password: 'uwzqr4km5z3yr7n8',
