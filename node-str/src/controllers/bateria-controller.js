@@ -47,7 +47,7 @@ exports.criar_bateria = (req, res, next) =>{
                 }
                 res.json(rows);
             }) 
-        }    
+        }
 
 };
 
