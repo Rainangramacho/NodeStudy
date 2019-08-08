@@ -22,8 +22,8 @@ exports.criar_bateria = (req, res, next) =>{
       }
       //vendo se na tabela de surfistas existe um surfista com o numero informado
      conexao.query('SELECT surfista.numero FROM surfista WHERE numero = " ' + bateria.surfista_numero1 +' " OR numero = " ' + bateria.surfista_numero2 +' " ;', (err, res) => {
-        console.log(err, res, res.length); // deve dar null, [], 0
-        if (res.length < 2){// se ficar igual a zero é pq nao existe um ou os dois surfistas informados
+        console.log(err, res, res.length); 
+        if (res.length < 2){
             console.log('Um ou os dois surfistas informados não existe');
             teste =1;
             //se não existir surfista, nao cadastra na bateria
@@ -33,7 +33,7 @@ exports.criar_bateria = (req, res, next) =>{
     //verificando se um sufista existe e se ele ta cadastrado na bateria , caso ele exista mas nao esteja cadastrado na bateria, então poderá ser cadastrado
     conexao.query('SELECT * FROM bateria WHERE EXISTS (SELECT numero FROM surfista WHERE surfista.numero = "' + bateria.surfista_numero1 + '" OR surfista.numero = "' + bateria.surfista_numero2 + '")AND bateria.id = " ' + bateria.id +' " ;', (err, res) => {
         console.log(err, res, res.length); 
-        if (res.length >= 1){ // possa ser que tenha mais de um surfista cadastrado com o mesmo numero
+        if (res.length >= 1){ 
             console.log('Surfista1 já está cadastrado na bateria, cadastre outro surfista.');
             teste =1;
         }
@@ -76,16 +76,3 @@ exports.deletar_bateria = (req, res, next)=>{
 }) 
 };
 
-exports.obter_vencedor = (req, res, next)=>{
-    const bateria = { 
-        id : req.params.id,
-      }
-
-   var sql6 = '';
-   conexao.query(sql6, function(err, rows, fields){
-    if (err){
-        res.status(500).send({error: ' Algo falhou '})
-    }
-    res.json(rows);
-}) 
-};
