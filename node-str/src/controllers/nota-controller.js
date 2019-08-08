@@ -69,7 +69,7 @@ exports.surfista_vencedor_bateria = (req, res, next) => {
 
             rows[0].forEach((element,i) => {
                     nota_final1 = element.media_surfista_1;
-                   
+
             });
             rows[2].forEach((element,i) => {
                 
