@@ -14,10 +14,10 @@ exports.cadastrar_onda = (req, res, next) => {
         if (res.length == 0){
             console.log('');
             helpVar =1;
-            //console.log(helpVar);
-            //se não existir surfista, nao cadastra na bateria
+            
         }
     });  
+    
     if(helpVar == 0){
         var sql = 'INSERT INTO onda (id, Surfista_numero, Bateria_id)' +
         'VALUES (" '+onda.id+' ", " '+ onda.surfista_numero+' ", " ' + onda.bateria_id+' ");';
