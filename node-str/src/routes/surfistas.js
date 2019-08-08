@@ -13,7 +13,5 @@ router.put ('/editar_surfista/:numero', controller.editar_surfista);
 router.put ('/editar_surfista_pais/:numero', controller.editar_surfista_pais);
 router.delete ('/deletar_surfista/:numero', controller.deletar_surfista);
 
-
-
 module.exports = router;
 
